@@ -1,0 +1,51 @@
+14<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>西淀川区防災</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoidHRvc2hpaSIsImEiOiJja2tnN3dtNmkwdTJ0MnVxdGFmd3lqbnY5In0.VfC4e9IOPZevGfMiBxF68w';
+    var map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/ttoshii/ckro86rsk1ggp17mupitc4i6k', // style URL
+        center: [135.45609, 34.71148], // starting position
+        zoom: 14 // starting zoom
+    });
+
+    map.on('load', function () {
+        // Add a data source containing GeoJSON data.
+        map.addSource('flood', {
+type: 'vector',
+// Use any Mapbox-hosted tileset using its tileset id.
+// Learn more about where to find a tileset id:
+// https://docs.mapbox.com/help/glossary/tileset-id/
+url: 'mapbox://ttoshii.dal1fppc'
+});
+
+        // Add a new layer to visualize the polygon.
+        map.addLayer({
+            'id': 'maine',
+            'type': 'fill',
+            'source': 'flood', // reference the data source
+            'layout': {},
+            'paint': {
+                'fill-color': '#0080ff', // blue color fill
+                'fill-opacity': 1
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>
