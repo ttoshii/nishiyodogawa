@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>西淀川区避難所</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css" rel="stylesheet" />
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+    .mapboxgl-popup {
+        max-width: 600px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+    #menu {
+        background: #fff;
+        position: absolute;
+        z-index: 1;
+        top: 10px;
+        right: 10px;
+        border-radius: 3px;
+        width: 120px;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        font-family: 'Open Sans', sans-serif;
+    }
+    
+    #menu a1 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a1:last-child {
+        border: none;
+    }
+    
+    #menu a1:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a1.active {
+        background-color: #E60012;
+        color: #ffffff;
+    }
+    
+    #menu a1.active:hover {
+        background: #E60012;
+    }
+
+    #menu a2 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a2:last-child {
+        border: none;
+    }
+    
+    #menu a2:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a2.active {
+        background-color: #F39800;
+        color: #ffffff;
+    }
+    
+    #menu a2.active:hover {
+        background: #F39800;
+    }
+
+    #menu a3 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a3:last-child {
+        border: none;
+    }
+    
+    #menu a3:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a3.active {
+        background-color: #FFF100;
+        color: #404040;
+    }
+    
+    #menu a3.active:hover {
+        background: #FFF100;
+    }
+    #menu a4 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a4:last-child {
+        border: none;
+    }
+    
+    #menu a4:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a4.active {
+        background-color: #8FC31F;
+        color: #ffffff;
+    }
+    
+    #menu a4.active:hover {
+        background: #8FC31F;
+    }
+
+    #menu a5 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a5:last-child {
+        border: none;
+    }
+    
+    #menu a5:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a5.active {
+        background-color: #009944;
+        color: #ffffff;
+    }
+    
+    #menu a5.active:hover {
+        background: #009944;
+    }
+
+    #menu a6 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a6:last-child {
+        border: none;
+    }
+    
+    #menu a6:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a6.active {
+        background-color: #009E96;
+        color: #ffffff;
+    }
+    
+    #menu a6.active:hover {
+        background: #009E96;
+    }
+
+    #menu a7 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a7:last-child {
+        border: none;
+    }
+    
+    #menu a7:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a7.active {
+        background-color: #00A0E9;
+        color: #ffffff;
+    }
+    
+    #menu a7.active:hover {
+        background: #00A0E9;
+    }
+
+    #menu a8 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a8:last-child {
+        border: none;
+    }
+    
+    #menu a8:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a8.active {
+        background-color: #0068B7;
+        color: #ffffff;
+    }
+    
+    #menu a8.active:hover {
+        background: #0068B7;
+    }
+
+    #menu a9 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a9:last-child {
+        border: none;
+    }
+    
+    #menu a9:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a9.active {
+        background-color: #1D2088;
+        color: #ffffff;
+    }
+    
+    #menu a9.active:hover {
+        background: #1D2088;
+    }
+
+    #menu a10 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a10:last-child {
+        border: none;
+    }
+    
+    #menu a10:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a10.active {
+        background-color: #920783;
+        color: #ffffff;
+    }
+    
+    #menu a10.active:hover {
+        background: #920783;
+    }
+
+    #menu a11 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a11:last-child {
+        border: none;
+    }
+    
+    #menu a11:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a11.active {
+        background-color: #E4007F;
+        color: #ffffff;
+    }
+    
+    #menu a11.active:hover {
+        background: #E4007F;
+    }
+
+    #menu a12 {
+        font-size: 13px;
+        color: #404040;
+        display: block;
+        margin: 0;
+        padding: 0;
+        padding: 10px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        text-align: center;
+    }
+    
+    #menu a12:last-child {
+        border: none;
+    }
+    
+    #menu a12:hover {
+        background-color: #f8f8f8;
+        color: #404040;
+    }
+    
+    #menu a12.active {
+        background-color: #E5004F;
+        color: #ffffff;
+    }
+    
+    #menu a12.active:hover {
+        background: #E5004F;
+    }
+
+</style>
+<div id="map"></div>
+<nav id="menu"></nav>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoidHRvc2hpaSIsImEiOiJja2tnN3dtNmkwdTJ0MnVxdGFmd3lqbnY5In0.VfC4e9IOPZevGfMiBxF68w';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/ttoshii/ckotdycja03i417om9w2z7kx8',
+        center: [135.45614,34.71143],
+        zoom: 15,
+        antialias: true
+    });
+
+    map.on('load', function() {
+map.addSource('evacuation', {
+'type': 'geojson',
+'data': 'https://script.google.com/macros/s/AKfycbwPUt4FPISUlSJNdxwrHvChD2bocFJmr_Z_9o5BbjWsfqachH8FHYdh0SSIWytJ4sGVnA/exec'
+});
+ 
+
+
+
+
+map.addLayer({
+'id': 'hinanjyo' ,
+'type': 'circle',
+'source': 'evacuation',
+'paint': {
+    'circle-radius': 10,
+'circle-color': '#4264FB'
+},
+});
+
+map.on('click', 'hinanjyo', (e) => {
+            // Copy coordinates array.
+            const coordinates = e.features[0].geometry.coordinates.slice();
+            const description = e.features[0].properties.description;
+
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        });
+
+
+
+
+});
+
+</script>
+
+</body>
+</html>
